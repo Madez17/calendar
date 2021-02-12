@@ -1,0 +1,20 @@
+@import '../base'
+
+.calendar
+    &__header
+        color: $primary-color
+        @extend %cell-position
+    &__control
+        background: none
+        border: none
+    &__list-days
+        @extend %cell-position
+    &__days
+        @extend %cell
+    &__cells
+        @extend %cell-position
+        
+    &__cell
+        @extend %cell
+        margin: 0
+        border: 1px solid
