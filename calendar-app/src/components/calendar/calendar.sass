@@ -1,0 +1,86 @@
+@import '../../base'
+
+.App
+    position: relative
+    &__title
+      color: $details-color
+      font-size: $font-size-big
+      padding: 60px 0
+.calendar
+    &__body
+      background: $primary-color
+      margin: 1px auto
+      max-width: 80%
+      padding: 0 70px 70px 70px
+    &__header
+      background: $primary-color
+      border-radius: 10px 10px 0 0
+      color: $secondary-color
+      display: flex
+      justify-content: space-around
+      margin: 0 auto
+      max-width: 80%
+      padding: 66px 70px
+    &__month-name
+      border-radius: 100%
+      background-color: $third-color
+      font-size: $font-size-big
+      height: 280px
+      line-height: 280px
+      margin: $padding
+      padding: 13px
+      width: 280px
+    &__control
+      background: none
+      border: none
+      outline: none
+      i
+        color: $third-color
+        cursor: pointer
+        font-size: $font-size-mid
+    &__list-days
+      @extend %cell-position
+      color: $secondary-color
+      font-size: $font-size-normal
+      font-weight: bolder
+      text-transform: uppercase
+    &__days
+      padding: $cell-padding
+      width: $cell-width
+    &__cells
+      @extend %cell-position
+        
+    &__cell
+      @extend %cell
+      position: relative
+      &--disable
+        background: $disable-background
+        color: $disable-color
+      &:hover > &--reminder
+        display: block
+      &--reminder
+        background-color: $details-color
+        border: none
+        border-radius: 50%
+        bottom: 10px
+        color: $secondary-color
+        cursor: pointer
+        display: none
+        height: 35px
+        position: absolute
+        right: 10px
+        width: 35px
+        i
+          font-size: $font-size-small
+    
+    &__delete-reminders
+      border-top: 1px solid $secondary-color
+      color: $secondary-color
+      font-size: 1.5rem
+      margin-top: 58px
+      padding-top: 42px
+      .trash
+        background: $secondary-color
+        color: $details-color
+        padding: 14px
+        border-radius: 100%

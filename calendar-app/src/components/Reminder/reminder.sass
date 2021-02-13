@@ -1,0 +1,103 @@
+@import '../../base'
+
+.modal
+  align-items: center
+  background:#f2f1df7a
+  bottom: 0
+  display: flex
+  position: absolute
+  justify-content: center
+  left: 0
+  right: 0
+  top: 0
+  width: 100%
+  &__content
+    background: $primary-color
+    border-radius: 14px
+    padding: 54px
+    max-width: 53%
+    width: 100%
+  &__header
+    color: #010A26
+    display: flex
+    font-size: $font-size-normal
+    justify-content: space-between
+    i
+      cursor: pointer
+  input
+    background: $secondary-color
+    border: transparent
+    border-radius: 5px
+    color: $third-color
+    font-size: $font-size-small
+    padding: 32px 10px
+    width: 100%
+  &__container
+    margin-right: 10px
+    position: relative
+    &::after
+      @extend %afete-arrow
+  &__body
+    display: flex
+    padding-top: 27px
+    select
+      appearance: none
+      background: $third-color
+      border: none
+      border-radius: 5px
+      color: $secondary-color
+      font-size: $font-size-buttons
+      padding: 12px 40px
+      position: relative
+      -moz-appearance: none
+      -webkit-appearance: none
+  &__footer
+    text-align: right
+  &__control
+    background: $details-color
+    border: none
+    border-radius: 5px
+    color: $secondary-color
+    font-size: $font-size-buttons
+    margin-left: 10px
+    padding: 12px 40px
+    position: relative
+    &:hover
+      background: #EA3D4C
+
+.calendar
+  &__container-reminders
+      overflow: scroll
+      max-height: 130px
+  &__reminder
+    border-radius: 6px
+    color: white
+    height: auto
+    margin-bottom: 5px
+    padding: 7px
+    &--blue
+      background: $third-color
+    &--blue-ligth
+      background: $blue-dark
+    &--pink
+      background: $details-color
+  &__icons
+    display: flex
+    justify-content: space-between
+    padding-top: 10px
+    i
+      border-radius: 100%
+      cursor: pointer
+      font-size: $font-size-buttons
+      margin-right: 9px
+      padding: 8px
+    .trash
+      color: $secondary-color
+    .pencil
+      background: $secondary-color
+      &--blue
+        color: $third-color
+      &--blue-ligth
+        color: $blue-dark
+      &--pink
+        color: $details-color

@@ -1,16 +1,54 @@
 // Variables
-$primary-color: #000
-$cell-width: 14%
-$cell-padding: 48px 0px
+$border-color: #ccc
+$blue-dark: #378C7D
+$cell-width: 11%
+$cell-padding: 18px 21.9px
+$padding: 0 40px
+$width: 100%
+$font-size-normal: 1.2rem
+$font-size-mid: 2rem
+$font-size-big: 3.5rem
+$font-size-buttons: 1rem
+$font-size-small: 0.9rem
+
+$primary-color: #91D9BF
+$secondary-color: #F2F1DF
+$third-color: #010A26
+$details-color: #F24B59
+
+$disable-background: #fdfdfd30
+$disable-color: #adadad
+// $gradied:rgb(55,140,125)
+// $gradiend-complement: linear-gradient(0deg, rgba(55,140,125,1) 37%, rgba(145,217,191,1) 68%) 
+
 
 // Extend
 %cell-position
     display: flex
-    justify-content: space-around
     flex-wrap: wrap
 %cell
-    width: $cell-width
+    background-color: $secondary-color
+    border: 1px solid $border-color
+    color: $details-color
+    margin: 0
+    max-width: $cell-width
+    min-height: 150px
     padding: $cell-padding
+    text-align: left
+    width: $width
+%afete-arrow
+  border-left: 5px solid transparent
+  border-right: 5px solid transparent
+  border-top: 5px solid $secondary-color
+  content: ''
+  cursor: pointer
+  height: 0
+  position: absolute
+  pointer-events: none
+  right: 19px
+  top: 50%
+  transform: translateY(-50%)
+  width: 0
 
 // General styles
 .App

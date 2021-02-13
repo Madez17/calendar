@@ -1,4 +1,4 @@
-import Calendar from './components/calendar'
+import Calendar from './components/calendar/index'
 import './base.sass';
 
 function App() {
