@@ -1,5 +1,4 @@
 @import '../../base'
-
 .modal
   align-items: center
   background:#f2f1df7a
@@ -30,7 +29,8 @@
     border-radius: 5px
     color: $third-color
     font-size: $font-size-small
-    padding: 32px 10px
+    height: 50px
+    padding: 14px 10px
     width: 100%
   &__container
     margin-right: 10px
@@ -39,6 +39,7 @@
       @extend %afete-arrow
   &__body
     display: flex
+    flex-wrap: wrap
     padding-top: 27px
     select
       appearance: none
@@ -47,12 +48,19 @@
       border-radius: 5px
       color: $secondary-color
       font-size: $font-size-buttons
+      margin-bottom: 20px
       padding: 12px 40px
       position: relative
       -moz-appearance: none
       -webkit-appearance: none
+    &__time
+      height: 45px
+      background: $third-color
+      border-radius: 5px
+      color: $secondary-color
   &__footer
     text-align: right
+    padding-top: 35px
   &__control
     background: $details-color
     border: none
@@ -65,10 +73,11 @@
     position: relative
     &:hover
       background: #EA3D4C
+  
 
 .calendar
   &__container-reminders
-      max-height: 130px
+      max-height: 150px
       overflow-y: auto
   &__reminder
     border-radius: 6px
@@ -76,6 +85,7 @@
     height: auto
     margin-bottom: 5px
     padding: 7px
+    word-wrap: break-all
     &--blue
       background: $third-color
     &--blue-ligth
@@ -102,3 +112,26 @@
         color: $blue-dark
       &--pink
         color: $details-color
+
+// React-datepicker
+.react-date-picker.react-date-picker--closed.react-date-picker--enabled,
+.react-date-picker.react-date-picker--open.react-date-picker--enabled
+  height: 45px
+.react-date-picker
+  &__wrapper
+    background: #010a26
+    color: #f2f1df
+    border-radius: 5px
+    border: none
+    margin-right: 10px
+  &__inputGroup input
+    background: transparent
+    color: white
+    padding: 0
+    border: none
+.react-date-picker__clear-button__icon.react-date-picker__button__icon,
+.react-date-picker__calendar-button__icon.react-date-picker__button__icon
+  stroke: $secondary-color
+.react-date-picker__button:enabled:hover .react-date-picker__button__icon, .react-date-picker__button:enabled:focus .react-date-picker__button__icon,
+.react-date-picker__button:enabled:hover .react-date-picker__button__icon, .react-date-picker__button:enabled:focus .react-date-picker__button__icon
+  stroke: $details-color

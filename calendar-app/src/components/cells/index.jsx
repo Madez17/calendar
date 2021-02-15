@@ -1,72 +1,51 @@
 import React, { useState } from 'react';
-import ReminderModal from '../Reminder/index';
+import moment from 'moment';
+import { connect } from 'react-redux';
+import {
+  createReminder,
+  editReminder,
+  deleteReminder,
+  deleteDayReminders
+} from '../../store/reminders';
+import PropTypes from 'prop-types';
+import ReminderModal from '../reminderModal/index';
 
-function Cells({days}) {
+function Cells({
+  days,
+  reminders,
+  dispatchCreateReminder,
+  dispatchEditReminder,
+  dispatchDeleteReminder,
+  dispatchDeleteDayReminders
+}) {
   const [isOpen, setIsOpen] = useState(false);
-
-  const reminders = [
-    {
-      id: 1,
-      description: 'Mi Primer Reminder',
-      color: 'pink',
-      date: 13
-    },
-    {
-      id: 2,
-      description: 'Reminder Mafe Si estoy aprend',
-      color: 'blue',
-      date: 17
-    },
-    {
-      id: 3,
-      description: 'Reminder Mafe 2',
-      color: 'blue-ligth',
-      date: 17
-    },
-    {
-      id: 4,
-      description: 'Reminder Mafe 3',
-      color: 'pink',
-      date: 17
-    },
-    {
-      id: 5,
-      description: 'Reminder Mafe 4',
-      color: 'blue-ligth',
-      date: 17
-    },
-    {
-      id: 6,
-      description: 'Reminder Mafe 5',
-      color: 'blue-ligth',
-      date: 17
-    },
-    {
-      id: 7,
-      description: 'Reminder Mafe 6',
-      color: 'blue-ligth',
-      date: 17
-    },
-    {
-      id: 8,
-      description: 'Reminder Mafe 7',
-      color: 'blue-ligth',
-      date: 17
-    }
-  ];
+  const [reminderToEdit, setReminderToEdit] = useState(null);
 
   const closeModal = () => {
     setIsOpen(false);
+    setReminderToEdit(null);
   }
 
   const openModal = () => {
     setIsOpen(true);
+    setReminderToEdit(null);
   }
 
-  const createReminder = () => {
-    setIsOpen(false);
+  const handleEventReminder = (dataReminder, type) => {
+    if (type  === 'create') {
+      dispatchCreateReminder(dataReminder);
+    }
+
+    if (type  === 'edit') {
+      dispatchEditReminder(dataReminder);
+    }
+    closeModal();
   }
 
+  const handleEditReminder = (dataToEdit) => {
+    openModal();
+    setReminderToEdit(dataToEdit);
+  }
   
   return (
     <>
@@ -75,20 +54,22 @@ function Cells({days}) {
         days.map((cell, index) => ( 
           <div key={index} className={`calendar__cell ${!cell.isCurrentMonth ? 'calendar__cell--disable' : '' }`}>
             <p>{cell.date.date()}</p>
+            <span onClick={() => dispatchDeleteDayReminders(cell.date.format('MM DD YYYY'))}><i className="fas fa-trash-alt trash"></i></span>
             
             <div className='calendar__container-reminders'>
               {
                 reminders.map((reminder, index) => {
-                  if (cell.date.date() === reminder.date)
+                  if (cell.date.format('MM DD YYYY') === moment(reminder.date).format('MM DD YYYY')) {
                     return (
-                      <div className={`calendar__reminder calendar__reminder--${reminder.color}`}>
+                      <div key={index} className={`calendar__reminder calendar__reminder--${reminder.color}`}>
+                        <p className='calendar__hour'>{reminder.time}</p>
                         <span>{reminder.description}</span>
                         <div className='calendar__icons'>
-                          <span><i className='fas fa-trash-alt trash'></i></span>
-                          <span><i className={`fas fa-pencil-alt pencil pencil--${reminder.color}`}></i></span>
+                          <span onClick={() => dispatchDeleteReminder(reminder.id)}><i className='fas fa-trash-alt trash'></i></span>
+                          <span onClick={() => handleEditReminder(reminder)}><i className={`fas fa-pencil-alt pencil pencil--${reminder.color}`}></i></span>
                         </div>
                       </div>
-                    )
+                    )}
                   })
                 }
               </div>
@@ -96,11 +77,37 @@ function Cells({days}) {
           </div>
         ))
       }
-
-      {isOpen && <ReminderModal closeModal={closeModal} createReminder={createReminder} />}
+      {isOpen && <ReminderModal reminderToEdit={reminderToEdit} closeModal={closeModal} eventReminder={handleEventReminder} />}
     </>
     
   )
 }
 
-export default Cells;
+Cells.propTypes = {
+  days: PropTypes.array,
+  reminders: PropTypes.array,
+  dispatchCreateReminder: PropTypes.func,
+  dispatchEditReminder: PropTypes.func,
+  dispatchDeleteReminder: PropTypes.func
+}
+
+const mapStateToProps = (state) => ({
+  reminders: state.reminders
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  dispatchCreateReminder: (dataReminder) => {
+    dispatch(createReminder(dataReminder))
+  },
+  dispatchEditReminder: (dataReminder) => {
+    dispatch(editReminder(dataReminder))
+  },
+  dispatchDeleteReminder: (reminderId) => {
+    dispatch(deleteReminder(reminderId))
+  },
+  dispatchDeleteDayReminders: (date) => {
+    dispatch(deleteDayReminders(date))
+  }
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Cells);
