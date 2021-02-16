@@ -3,7 +3,6 @@ const CREATE_REMINDER = 'createReminder';
 const EDIT_REMINDER = 'editReminder';
 const DELETE_REMINDER = 'deleteReminder';
 const DELETE_DAY_REMINDERS = 'deleteDayReminders';
-const DELETE_ALL_REMINDERS = 'deleteAllReminders';
 
 // Action Creators
 export const createReminder = (reminder) => {
@@ -34,10 +33,6 @@ export const deleteDayReminders = (date) => ({
   }
 });
 
-export const deleteAllReminder = () => ({
-  type: DELETE_ALL_REMINDERS
-});
-
 // Reducer
 let lastIdReminder = 0;
 
@@ -47,32 +42,29 @@ export default function reducer(state = [], action) {
       return {
         ...state,
         reminders: state.reminders.concat({
-          ...action.payload,      
-          id: ++lastIdReminder
-        })
-      }
+            ...action.payload,      
+            id: ++lastIdReminder
+          }
+        )
+      };
     case EDIT_REMINDER:
       return {
         ...state,
         reminders: state.reminders.map((reminder) => 
           reminder.id !== action.payload.id ? reminder : {...reminder, ...action.payload}
-      )}
+        )
+      };
     case DELETE_REMINDER:
       return {
         ...state,
         reminders: state.reminders.filter((reminder) => reminder.id !== action.payload.id)
-      }
+      };
     case DELETE_DAY_REMINDERS:
       return {
         ...state,
         reminders: state.reminders.filter((reminder) => {
           return reminder.date !== action.payload.date
         })
-      }
-    case DELETE_ALL_REMINDERS:
-      return {
-        ...state,
-        reminders: []
       };
     default:
       return state;

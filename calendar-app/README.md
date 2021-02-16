@@ -14,6 +14,10 @@
       npm start
       ```
 ## Unit Testing
+- To run test:
+      ```
+      npm run test
+      ```
 
 ## Dependencies
 

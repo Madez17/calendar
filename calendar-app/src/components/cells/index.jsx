@@ -54,26 +54,39 @@ function Cells({
         days.map((cell, index) => ( 
           <div key={index} className={`calendar__cell ${!cell.isCurrentMonth ? 'calendar__cell--disable' : '' }`}>
             <p>{cell.date.date()}</p>
-            <span onClick={() => dispatchDeleteDayReminders(cell.date.format('MM DD YYYY'))}><i className="fas fa-trash-alt trash"></i></span>
-            
             <div className='calendar__container-reminders'>
               {
-                reminders.map((reminder, index) => {
+                reminders
+                .sort((remA, remB) => remA.timeInMilliseconds - remB.timeInMilliseconds)
+                .map((reminder, index) => {
                   if (cell.date.format('MM DD YYYY') === moment(reminder.date).format('MM DD YYYY')) {
                     return (
+                      <>
+                      {index <= 1 && (
+                        <span className='calendar__cell-trash' onClick={() => dispatchDeleteDayReminders(cell.date.format('MM DD YYYY'))}>
+                          <i className="fas fa-trash-alt trash"></i>
+                        </span>
+                      )}
                       <div key={index} className={`calendar__reminder calendar__reminder--${reminder.color}`}>
                         <p className='calendar__hour'>{reminder.time}</p>
                         <span>{reminder.description}</span>
                         <div className='calendar__icons'>
-                          <span onClick={() => dispatchDeleteReminder(reminder.id)}><i className='fas fa-trash-alt trash'></i></span>
-                          <span onClick={() => handleEditReminder(reminder)}><i className={`fas fa-pencil-alt pencil pencil--${reminder.color}`}></i></span>
+                          <span onClick={() => dispatchDeleteReminder(reminder.id)}>
+                            <i className='fas fa-trash-alt trash'></i>
+                          </span>
+                          <span onClick={() => handleEditReminder(reminder)}>
+                            <i className={`fas fa-pencil-alt pencil pencil--${reminder.color}`}></i>
+                          </span>
                         </div>
                       </div>
+                      </>
                     )}
                   })
                 }
               </div>
-              <button onClick={openModal} className="calendar__cell--reminder"><i className="fas fa-plus"></i> <br></br></button>
+              <button onClick={openModal} className="calendar__cell--reminder">
+                <i className="fas fa-plus"></i>
+              </button>
           </div>
         ))
       }

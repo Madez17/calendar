@@ -1,7 +1,7 @@
 import { Provider } from 'react-redux';
 import configStore from './store/store';
 import Calendar from './components/calendar/index';
-import './base.sass';;
+import './base.sass';
 
 function App() {
   return (

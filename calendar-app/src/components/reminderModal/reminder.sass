@@ -17,7 +17,7 @@
     max-width: 53%
     width: 100%
   &__header
-    color: #010A26
+    color: $third-color
     display: flex
     font-size: $font-size-normal
     justify-content: space-between
@@ -58,6 +58,16 @@
       background: $third-color
       border-radius: 5px
       color: $secondary-color
+    &__weather
+      background: $third-color
+      border: transparent
+      border-radius: 5px
+      color: $secondary-color
+    &__weather-title
+      border-bottom: 1px solid $secondary-color
+      margin: 0 auto
+      padding: 15px 0 11px
+      width: 80%
   &__footer
     text-align: right
     padding-top: 35px
@@ -85,7 +95,7 @@
     height: auto
     margin-bottom: 5px
     padding: 7px
-    word-wrap: break-all
+    word-wrap: break-word
     &--blue
       background: $third-color
     &--blue-ligth

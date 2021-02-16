@@ -1,12 +1,14 @@
 import { URL, APIKEY } from '../config/config'
-const wheather = async () => {
+
+const Weather = async (city) => {
     try {
-      const result = await fetch(`${URL}`);
-      return result.data;
+      const response = await fetch(`${URL}${city},co&appid=${APIKEY}`);
+      const data = await response.json();
+      const weatherForecast = data.weather[0];
+      return weatherForecast;
     } catch(error) {
-      console.log(`Error: ${error}`)
+      return error;
     }
 };
 
-
-export default wheather;
+export default Weather;
