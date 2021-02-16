@@ -6,9 +6,11 @@ Write down your reminders, so you don't forget.
 
 - UI
 
-![Imgur](https://i.imgur.com/bf7p0Jq.png)
+![Imgur](https://i.imgur.com/OiD35No.png)
 
-- Create Reminder
+- UI Modal create Reminder
+
+![Imgur](https://i.imgur.com/tUPYat6.png)
 
 
 ### This application was developed with React App
@@ -39,7 +41,7 @@ Write down your reminders, so you don't forget.
     clone the project.
     ```
 
-2. Move to the folder [calendar-app](https://github.com/Madez17/calendar/tree/main/calendar-app) to follow the environment configuration instructions in order to run the application.
+2. Move to the folder [calendar-app](https://github.com/Madez17/calendar/tree/main/calendar-app) and follow the environment configuration instructions in order to run the application.
 
 
 ---
